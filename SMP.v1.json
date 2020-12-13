@@ -1411,7 +1411,8 @@
         "required": [
           "mo",
           "year"
-        ]
+        ],
+        "description": "Остаток объемов (smp_task_stage)"
       },
       "talonComment": {
         "title": "Комментарий",
