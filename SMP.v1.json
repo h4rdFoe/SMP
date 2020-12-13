@@ -1,0 +1,1582 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SMP",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/insuranceCompany": {
+      "get": {
+        "summary": "Страховые компании",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InsuranceCompany_V1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-benefit",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "name",
+            "description": "Наименование"
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/mkb10": {
+      "get": {
+        "summary": "Диагнозы",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Mkb10_V1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-mkb10",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "name",
+            "description": "Поиск по коду + наименование"
+          }
+        ]
+      }
+    },
+    "/organization": {
+      "get": {
+        "summary": "МО",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Organization_V1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-organization",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "name",
+            "description": "Поиск по краткому и полному наименованию"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "profileId",
+            "description": "Поиск по профилю"
+          }
+        ]
+      }
+    },
+    "/respFace": {
+      "get": {
+        "summary": "ДЛ",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RespFace_V1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-respFace",
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "organization",
+            "description": "Поиск по ид орг"
+          }
+        ]
+      }
+    },
+    "/taskStageCount": {
+      "get": {
+        "summary": "Получение остатков по объемам",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/taskStageCount"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-taskStageCount",
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "mo",
+            "description": "МО",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "year",
+            "required": true,
+            "description": "Год"
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "benefit": {
+        "title": "Категория льготы",
+        "type": "object",
+        "description": "Категория льготы (ref_benefit)",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "nameShort": {
+            "type": "string",
+            "description": "Краткое наименование"
+          },
+          "nameFull": {
+            "type": "string",
+            "description": "Полное наименование"
+          }
+        },
+        "required": [
+          "id",
+          "nameShort",
+          "nameFull"
+        ]
+      },
+      "financeSourse": {
+        "title": "Источник финансирования",
+        "type": "object",
+        "description": "Источник финансирования (ref_finance_sourse)",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "name": {
+            "type": "string",
+            "description": "Наименование"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "hospitalResult": {
+        "title": "Результат госпитализации",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "name": {
+            "type": "integer",
+            "description": "Наименование"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "description": "Результат госпитализации (ref_hospital_result)"
+      },
+      "insuranceCompany": {
+        "title": "Страховая компания",
+        "type": "object",
+        "description": "Страховая компания (ref_foms_insurance_company), \nID=id, SMOCOD=code, NAM_SMOP=fullName, NAM_SMOK = shaortName, ADDR_F=address",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "code": {
+            "type": "string",
+            "description": "Код"
+          },
+          "nameFull": {
+            "type": "string",
+            "description": "Полное наименование"
+          },
+          "nameShort": {
+            "type": "string",
+            "description": "Краткое наименование"
+          },
+          "address": {
+            "type": "string",
+            "description": "Адрес"
+          }
+        },
+        "required": [
+          "id",
+          "code",
+          "nameFull",
+          "nameShort"
+        ]
+      },
+      "mkb10": {
+        "title": "Диагноз по МКБ-10",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "code": {
+            "type": "string",
+            "description": "Код"
+          },
+          "name": {
+            "type": "string",
+            "description": "Наименование"
+          },
+          "parent": {
+            "type": "integer",
+            "description": "Родитель"
+          }
+        },
+        "required": [
+          "id",
+          "code",
+          "name"
+        ],
+        "description": "Диагноз по МКБ-10 (ref_mkb_10)"
+      },
+      "organization": {
+        "title": "Организация",
+        "type": "object",
+        "description": "Организация (ref_organization), \naddress = addrregionname + prefixarea + areaname + prefixstreet + streetname + house + building + struct",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "oid": {
+            "type": "string",
+            "description": "ОИД"
+          },
+          "nameFull": {
+            "type": "string",
+            "description": "Полное наименование"
+          },
+          "nameShort": {
+            "type": "string",
+            "description": "Краткое наименование"
+          },
+          "subject": {
+            "type": "integer",
+            "description": "Субъект РФ по конституции"
+          },
+          "address": {
+            "type": "string",
+            "description": "Адрес"
+          }
+        },
+        "required": [
+          "id",
+          "oid",
+          "nameFull",
+          "nameShort",
+          "subject"
+        ]
+      },
+      "position": {
+        "title": "Должность",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "parent": {
+            "type": "integer",
+            "description": "Родитель"
+          },
+          "name": {
+            "type": "string",
+            "description": "Наименование"
+          }
+        },
+        "required": [
+          "id",
+          "parent",
+          "name"
+        ],
+        "description": "Должность (ref_doctor_position)"
+      },
+      "reabilitation": {
+        "title": "Реабилитация",
+        "type": "object",
+        "description": "Реабилитация (ref_reabilitation)",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "name": {
+            "type": "string",
+            "description": "Наименование"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "recomendation": {
+        "title": "Рекомендация",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "name": {
+            "type": "string",
+            "description": "Наименование"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "description": "Рекомендация (ref_recomendation)"
+      },
+      "respFaceStatus": {
+        "title": "Статус проверки должностных лиц",
+        "type": "object",
+        "description": "Статус проверки должностных лиц (ref_doctor_status_validate)",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "name": {
+            "type": "string",
+            "description": "Наименование"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "smpCancelReason": {
+        "title": "Причина отказа",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "name": {
+            "type": "string",
+            "description": "Наименование"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "description": "Причина отказа (ref_smp_cancel_reason)"
+      },
+      "smpProfile": {
+        "title": "Профиль СМП",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "code": {
+            "type": "string",
+            "description": "Код"
+          },
+          "name": {
+            "type": "string",
+            "description": "Наименование"
+          }
+        },
+        "required": [
+          "id",
+          "code",
+          "name"
+        ],
+        "description": "Профиль СМП (ref_smp_profile)"
+      },
+      "smpStatus": {
+        "title": "Статус талона на СМП",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "name": {
+            "type": "string",
+            "description": "Наименование"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "description": "Статус талона на СМП (ref_smp_status)"
+      },
+      "socialGroup": {
+        "title": "Социальная группа",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "name": {
+            "type": "string",
+            "description": "Наименование"
+          },
+          "code": {
+            "type": "string",
+            "description": "Код"
+          },
+          "parent": {
+            "type": "integer",
+            "description": "Родитель"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "code"
+        ],
+        "description": "Социальная группа (ref_soc_status)"
+      },
+      "territory": {
+        "title": "Субъект РФ",
+        "type": "object",
+        "properties": {
+          "codeOkato": {
+            "type": "integer",
+            "description": "Код по ОКАТО"
+          },
+          "codeConstitution": {
+            "type": "integer",
+            "description": "Код по конституции"
+          },
+          "name": {
+            "type": "string",
+            "description": "Наименование"
+          },
+          "codeFo": {
+            "type": "integer",
+            "description": "Код федерального округа"
+          }
+        },
+        "required": [
+          "codeOkato",
+          "name"
+        ],
+        "description": "Субъект РФ (ref_territory)"
+      },
+      "typeNotice": {
+        "title": "Тип оповещения",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "name": {
+            "type": "string",
+            "description": "Наименование"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "description": "Тип оповещения (ref_type_notice)"
+      },
+      "fiasAddress": {
+        "title": "Адрес",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "addressName": {
+            "type": "string",
+            "description": "Текстовое представление адреса"
+          },
+          "homeNumber": {
+            "type": "string",
+            "description": "Номер дома"
+          },
+          "HousingNumber": {
+            "type": "string",
+            "description": "Корпус"
+          },
+          "flatNumber": {
+            "type": "string",
+            "description": "Квартира"
+          },
+          "postIndex": {
+            "type": "string",
+            "description": "Почтовый индекс"
+          },
+          "buildingNumber": {
+            "type": "string",
+            "description": "Строение"
+          }
+        },
+        "required": [
+          "id",
+          "addressName",
+          "homeNumber"
+        ],
+        "description": "Адрес (fias_address)"
+      },
+      "patient": {
+        "title": "Пациент",
+        "type": "object",
+        "description": "Пациент (patient)",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "surname": {
+            "type": "string",
+            "description": "Фамилия"
+          },
+          "name": {
+            "type": "string",
+            "description": "Имя"
+          },
+          "patronomic": {
+            "type": "string",
+            "description": "Отчество"
+          },
+          "snils": {
+            "type": "string",
+            "description": "СНИЛС"
+          },
+          "birthdate": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата рождения"
+          },
+          "isEnabled": {
+            "type": "string",
+            "description": "Признак актуальности"
+          },
+          "sex": {
+            "type": "string",
+            "description": "Пол"
+          },
+          "orgSave": {
+            "$ref": "#/components/schemas/organization"
+          },
+          "upDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "lastUserSave": {
+            "$ref": "#/components/schemas/user"
+          }
+        },
+        "required": [
+          "id",
+          "surname",
+          "name",
+          "birthdate",
+          "isEnabled",
+          "sex",
+          "orgSave",
+          "upDate",
+          "lastUserSave"
+        ]
+      },
+      "user": {
+        "title": "Пользователь",
+        "type": "object",
+        "description": "Пользователь (ias_user)",
+        "properties": {
+          "snils": {
+            "type": "string",
+            "description": "СНИЛС"
+          },
+          "surname": {
+            "type": "string",
+            "description": "Фамилия"
+          },
+          "name": {
+            "type": "string",
+            "description": "Имя"
+          },
+          "patronomic": {
+            "type": "string",
+            "description": "Отчество"
+          },
+          "organization": {
+            "$ref": "#/components/schemas/organization"
+          },
+          "entryDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата первого входа"
+          }
+        },
+        "required": [
+          "snils",
+          "surname",
+          "name",
+          "entryDate"
+        ]
+      },
+      "respFace": {
+        "title": "Должностное лица",
+        "type": "object",
+        "description": "Должностное лица (resp_face)",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "surname": {
+            "type": "string",
+            "description": "Фамилия"
+          },
+          "name": {
+            "type": "string",
+            "description": "Имя"
+          },
+          "patronomic": {
+            "type": "string",
+            "description": "Отчество"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Номер телефона"
+          },
+          "email": {
+            "type": "string",
+            "description": "e-mail"
+          },
+          "status": {
+            "$ref": "#/components/schemas/respFaceStatus"
+          },
+          "snils": {
+            "type": "string",
+            "description": "СНИЛС"
+          },
+          "organization": {
+            "$ref": "#/components/schemas/organization"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата созданич"
+          },
+          "upDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата последнего сохраненич"
+          },
+          "position": {
+            "$ref": "#/components/schemas/position"
+          },
+          "possiblePositions": {
+            "type": "array",
+            "description": "Возможные роли",
+            "items": {
+              "$ref": "#/components/schemas/position"
+            }
+          },
+          "lastUserSave": {
+            "$ref": "#/components/schemas/user"
+          }
+        },
+        "required": [
+          "surname",
+          "name",
+          "status",
+          "snils",
+          "organization",
+          "createdDate",
+          "upDate",
+          "position",
+          "lastUserSave"
+        ]
+      },
+      "smpStage1": {
+        "title": "1 этап",
+        "type": "object",
+        "description": "1 этап (smp_stage1)",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "Номер телефона"
+          },
+          "readyUsedate": {
+            "type": "boolean",
+            "description": "Согласие на использование персональных данных"
+          },
+          "numPolis": {
+            "type": "string",
+            "description": "Номер полиса"
+          },
+          "email": {
+            "type": "string",
+            "description": "email"
+          },
+          "upDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата последнего сохранения"
+          },
+          "fias": {
+            "$ref": "#/components/schemas/fiasAddress"
+          },
+          "insuranceCompany": {
+            "$ref": "#/components/schemas/insuranceCompany"
+          },
+          "benefit": {
+            "$ref": "#/components/schemas/benefit"
+          },
+          "socialGroup": {
+            "$ref": "#/components/schemas/socialGroup"
+          },
+          "lastUserSave": {
+            "$ref": "#/components/schemas/user"
+          }
+        },
+        "required": [
+          "id",
+          "readyUsedate",
+          "upDate",
+          "fias",
+          "benefit",
+          "socialGroup",
+          "lastUserSave"
+        ]
+      },
+      "smpStage2": {
+        "title": "2 этап",
+        "type": "object",
+        "description": "2 этап (smp_stage2)",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "decisDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата принятия решения"
+          },
+          "isReturned": {
+            "type": "boolean",
+            "description": "Признак возврата на 1 этап"
+          },
+          "dateReceiptDocMu": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата направления документов в МО"
+          },
+          "upDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата последнего сохранения"
+          },
+          "mkb10": {
+            "$ref": "#/components/schemas/mkb10"
+          },
+          "accompanyingIllness": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/mkb10"
+            }
+          },
+          "profile": {
+            "$ref": "#/components/schemas/smpProfile"
+          },
+          "mo": {
+            "$ref": "#/components/schemas/organization"
+          },
+          "respFace": {
+            "$ref": "#/components/schemas/respFace"
+          },
+          "lastUserSave": {
+            "$ref": "#/components/schemas/user"
+          }
+        },
+        "required": [
+          "id",
+          "decisDate",
+          "isReturned",
+          "dateReceiptDocMu",
+          "upDate",
+          "mkb10",
+          "profile",
+          "mo",
+          "respFace",
+          "lastUserSave"
+        ]
+      },
+      "smpStage3": {
+        "title": "3 этап",
+        "type": "object",
+        "description": "3 этап (smp_stage3)",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "decisDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата принятия решения"
+          },
+          "planDateHosp": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата планируемой госпитализации"
+          },
+          "dateSendToPat": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата уведомления направляющей МО и пациента о дате госпитализации"
+          },
+          "dateDocFromSendorg": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата получения документов от направляющей МО"
+          },
+          "dateRegistrationDocs": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата оформления документов МО"
+          },
+          "upDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата последнего сохранения"
+          },
+          "respFace": {
+            "$ref": "#/components/schemas/respFace"
+          },
+          "typeNotice": {
+            "$ref": "#/components/schemas/typeNotice"
+          },
+          "lastUserSave": {
+            "$ref": "#/components/schemas/user"
+          }
+        },
+        "required": [
+          "id",
+          "decisDate",
+          "planDateHosp",
+          "dateSendToPat",
+          "dateDocFromSendorg",
+          "dateRegistrationDocs",
+          "upDate",
+          "respFace",
+          "typeNotice",
+          "lastUserSave"
+        ]
+      },
+      "smpStage4": {
+        "title": "4 этап",
+        "type": "object",
+        "description": "4 этап (smp_stage4)",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "decisDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата принятия решения"
+          },
+          "needTalonWay": {
+            "type": "boolean",
+            "description": "Талоны на проезд предоставляются"
+          },
+          "wayTalonNum": {
+            "type": "string",
+            "description": "Номер талона на проезд"
+          },
+          "needAccomp": {
+            "type": "boolean",
+            "description": "Нуждается в сопровождении"
+          },
+          "fioAttend": {
+            "type": "string",
+            "description": "ФИО сопровождающего лица"
+          },
+          "dateObrPat": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата обращения пациента в МО"
+          },
+          "upDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата последнего сохранения"
+          },
+          "respFace": {
+            "$ref": "#/components/schemas/respFace"
+          },
+          "lastUserSave": {
+            "$ref": "#/components/schemas/user"
+          }
+        },
+        "required": [
+          "id",
+          "decisDate",
+          "needTalonWay",
+          "needAccomp",
+          "dateObrPat",
+          "upDate",
+          "respFace",
+          "lastUserSave"
+        ]
+      },
+      "smpStage5": {
+        "title": "5 этап",
+        "type": "object",
+        "description": "5 этап (smp_stage5)",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "datePatMu": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата обращения пациента в МО"
+          },
+          "clinicOtdel": {
+            "type": "string",
+            "description": "Отделение"
+          },
+          "upDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата последнего сохранения"
+          },
+          "respFace": {
+            "$ref": "#/components/schemas/respFace"
+          },
+          "lastUserSave": {
+            "$ref": "#/components/schemas/user"
+          }
+        },
+        "required": [
+          "id",
+          "datePatMu",
+          "clinicOtdel",
+          "upDate",
+          "respFace",
+          "lastUserSave"
+        ]
+      },
+      "smpStage6": {
+        "title": "6 этап",
+        "type": "object",
+        "description": "6 этап (smp_stage6)",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "datePatientOut": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата выписки пациента из МО"
+          },
+          "dateOper": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата операции"
+          },
+          "upDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата последнего сохранения"
+          },
+          "mkb10": {
+            "$ref": "#/components/schemas/mkb10"
+          },
+          "accompanyingIllness": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/mkb10"
+            }
+          },
+          "hospitalResult": {
+            "$ref": "#/components/schemas/hospitalResult"
+          },
+          "recomended": {
+            "$ref": "#/components/schemas/recomendation"
+          },
+          "respFace": {
+            "$ref": "#/components/schemas/respFace"
+          },
+          "lastUserSave": {
+            "$ref": "#/components/schemas/user"
+          }
+        },
+        "required": [
+          "id",
+          "datePatientOut",
+          "upDate",
+          "mkb10",
+          "hospitalResult",
+          "recomended",
+          "respFace",
+          "lastUserSave"
+        ]
+      },
+      "smpStage7": {
+        "title": "7 этап",
+        "type": "object",
+        "description": "7 этап (smp_stage7)",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "decisDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата принятия решения"
+          },
+          "reabilitationDone": {
+            "type": "boolean",
+            "description": "Реабилитация проведена"
+          },
+          "patDeath": {
+            "type": "boolean",
+            "description": "Пациент умер"
+          },
+          "upDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата последнего сохранения"
+          },
+          "reabilitation": {
+            "$ref": "#/components/schemas/reabilitation"
+          },
+          "respFace": {
+            "$ref": "#/components/schemas/respFace"
+          },
+          "lastUserSave": {
+            "$ref": "#/components/schemas/user"
+          }
+        },
+        "required": [
+          "id",
+          "decisDate",
+          "reabilitationDone",
+          "patDeath",
+          "upDate",
+          "reabilitation",
+          "respFace",
+          "lastUserSave"
+        ]
+      },
+      "smpTalon": {
+        "title": "Талан на СМП",
+        "type": "object",
+        "description": "Талан на СМП (smp_talon)",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "issueDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата оформления"
+          },
+          "uniqNumber": {
+            "type": "string",
+            "description": "Номер талона"
+          },
+          "isEnabled": {
+            "type": "boolean",
+            "description": "Признак активности"
+          },
+          "listWait": {
+            "type": "boolean",
+            "description": "Признак нахождения в ЛО"
+          },
+          "dateFromLw": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата выхода из ЛО"
+          },
+          "hospNextYear": {
+            "type": "boolean",
+            "description": "Госпитализация в следующем году"
+          },
+          "financeSource": {
+            "$ref": "#/components/schemas/financeSourse"
+          },
+          "orgSend": {
+            "$ref": "#/components/schemas/organization"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/patient"
+          },
+          "subject": {
+            "$ref": "#/components/schemas/territory"
+          },
+          "status": {
+            "$ref": "#/components/schemas/smpStatus"
+          },
+          "cancelReason": {
+            "$ref": "#/components/schemas/smpCancelReason"
+          },
+          "canceledStatus": {
+            "$ref": "#/components/schemas/smpStatus"
+          },
+          "respFace": {
+            "$ref": "#/components/schemas/respFace"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Системная дата создания"
+          },
+          "upDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата последнего сохранения"
+          },
+          "lastUserSave": {
+            "$ref": "#/components/schemas/user"
+          },
+          "stage1": {
+            "$ref": "#/components/schemas/smpStage1"
+          },
+          "stage2": {
+            "$ref": "#/components/schemas/smpStage2"
+          },
+          "stage3": {
+            "$ref": "#/components/schemas/smpStage3"
+          },
+          "stage4": {
+            "$ref": "#/components/schemas/smpStage4"
+          },
+          "stage5": {
+            "$ref": "#/components/schemas/smpStage5"
+          },
+          "stage6": {
+            "$ref": "#/components/schemas/smpStage6"
+          },
+          "stage7": {
+            "$ref": "#/components/schemas/smpStage7"
+          }
+        },
+        "required": [
+          "id",
+          "issueDate",
+          "uniqNumber",
+          "isEnabled",
+          "listWait",
+          "dateFromLw",
+          "hospNextYear",
+          "financeSource",
+          "orgSend",
+          "patient",
+          "subject",
+          "status",
+          "respFace",
+          "createdDate",
+          "upDate",
+          "lastUserSave"
+        ]
+      },
+      "taskStageCount": {
+        "title": "Остаток объемов",
+        "type": "object",
+        "properties": {
+          "mo": {
+            "$ref": "#/components/schemas/organization"
+          },
+          "year": {
+            "type": "integer",
+            "description": "Год"
+          },
+          "counts": {
+            "type": "array",
+            "description": "Кол-во",
+            "items": {
+              "type": "object",
+              "properties": {
+                "profile": {
+                  "$ref": "#/components/schemas/smpProfile"
+                },
+                "listWait": {
+                  "type": "integer",
+                  "description": "В ЛО"
+                },
+                "balance": {
+                  "type": "integer",
+                  "description": "Остаток"
+                },
+                "onTreatment": {
+                  "type": "integer",
+                  "description": "На лечении"
+                }
+              },
+              "required": [
+                "profile",
+                "listWait",
+                "balance",
+                "onTreatment"
+              ]
+            }
+          }
+        },
+        "required": [
+          "mo",
+          "year"
+        ]
+      },
+      "InsuranceCompany_V1": {
+        "title": "Страховая компания",
+        "type": "object",
+        "description": "Страховая компания (ref_foms_insurance_company), \nID=id, SMOCOD=code, NAM_SMOP=fullName, NAM_SMOK = shaortName, ADDR_F=address",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "code": {
+            "type": "string",
+            "description": "Код"
+          },
+          "nameFull": {
+            "type": "string",
+            "description": "Полное наименование"
+          },
+          "nameShort": {
+            "type": "string",
+            "description": "Краткое наименование"
+          },
+          "address": {
+            "type": "string",
+            "description": "Адрес"
+          }
+        },
+        "required": [
+          "id",
+          "code",
+          "nameFull",
+          "nameShort"
+        ]
+      },
+      "Mkb10_V1": {
+        "title": "Диагноз по МКБ-10",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "code": {
+            "type": "string",
+            "description": "Код"
+          },
+          "name": {
+            "type": "string",
+            "description": "Наименование"
+          },
+          "parent": {
+            "type": "integer",
+            "description": "Родитель"
+          }
+        },
+        "required": [
+          "id",
+          "code",
+          "name"
+        ],
+        "description": "Диагноз по МКБ-10 (ref_mkb_10)"
+      },
+      "Organization_V1": {
+        "title": "Организация",
+        "type": "object",
+        "description": "Организация (ref_organization), \naddress = addrregionname + prefixarea + areaname + prefixstreet + streetname + house + building + struct",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "oid": {
+            "type": "string",
+            "description": "ОИД"
+          },
+          "nameFull": {
+            "type": "string",
+            "description": "Полное наименование"
+          },
+          "nameShort": {
+            "type": "string",
+            "description": "Краткое наименование"
+          },
+          "subject": {
+            "type": "integer",
+            "description": "Субъект РФ по конституции"
+          },
+          "address": {
+            "type": "string",
+            "description": "Адрес"
+          }
+        },
+        "required": [
+          "id",
+          "oid",
+          "nameFull",
+          "nameShort",
+          "subject"
+        ]
+      },
+      "Position_V1": {
+        "title": "Должность",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "parent": {
+            "type": "integer",
+            "description": "Родитель"
+          },
+          "name": {
+            "type": "string",
+            "description": "Наименование"
+          }
+        },
+        "required": [
+          "id",
+          "parent",
+          "name"
+        ],
+        "description": "Должность (ref_doctor_position)"
+      },
+      "RespFaceStatus_V1": {
+        "title": "Статус проверки должностных лиц",
+        "type": "object",
+        "description": "Статус проверки должностных лиц (ref_doctor_status_validate)",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "name": {
+            "type": "string",
+            "description": "Наименование"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "RespFace_V1": {
+        "title": "Должностное лица",
+        "type": "object",
+        "description": "Должностное лица (resp_face)",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "surname": {
+            "type": "string",
+            "description": "Фамилия"
+          },
+          "name": {
+            "type": "string",
+            "description": "Имя"
+          },
+          "patronomic": {
+            "type": "string",
+            "description": "Отчество"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Номер телефона"
+          },
+          "email": {
+            "type": "string",
+            "description": "e-mail"
+          },
+          "status": {
+            "$ref": "#/components/schemas/RespFaceStatus_V1"
+          },
+          "snils": {
+            "type": "string",
+            "description": "СНИЛС"
+          },
+          "organization": {
+            "$ref": "#/components/schemas/Organization_V1"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата созданич"
+          },
+          "upDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата последнего сохраненич"
+          },
+          "position": {
+            "$ref": "#/components/schemas/Position_V1"
+          },
+          "possiblePositions": {
+            "type": "array",
+            "description": "Возможные роли",
+            "items": {
+              "$ref": "#/components/schemas/Position_V1"
+            }
+          },
+          "lastUserSave": {
+            "$ref": "#/components/schemas/User_V1"
+          }
+        },
+        "required": [
+          "surname",
+          "name",
+          "status",
+          "snils",
+          "organization",
+          "createdDate",
+          "upDate",
+          "position",
+          "lastUserSave"
+        ]
+      },
+      "User_V1": {
+        "title": "Пользователь",
+        "type": "object",
+        "description": "Пользователь (ias_user)",
+        "properties": {
+          "snils": {
+            "type": "string",
+            "description": "СНИЛС"
+          },
+          "surname": {
+            "type": "string",
+            "description": "Фамилия"
+          },
+          "name": {
+            "type": "string",
+            "description": "Имя"
+          },
+          "patronomic": {
+            "type": "string",
+            "description": "Отчество"
+          },
+          "organization": {
+            "$ref": "#/components/schemas/Organization_V1"
+          },
+          "entryDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата первого входа"
+          }
+        },
+        "required": [
+          "snils",
+          "surname",
+          "name",
+          "entryDate"
+        ]
+      }
+    }
+  }
+}
