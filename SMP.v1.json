@@ -188,7 +188,7 @@
     },
     "/comment/{talonId}": {
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "Полечение комментариев",
         "tags": [],
         "responses": {
           "200": {
