@@ -219,6 +219,47 @@
           "description": "Идентификатор талона"
         }
       ]
+    },
+    "/file": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/file"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-file",
+        "description": "",
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "patientId",
+            "description": "Идентификатор пациента"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "talonId",
+            "description": "Идентификатор талона"
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -239,12 +280,17 @@
           "nameFull": {
             "type": "string",
             "description": "Полное наименование"
+          },
+          "code": {
+            "type": "string",
+            "description": "Код"
           }
         },
         "required": [
           "id",
           "nameShort",
-          "nameFull"
+          "nameFull",
+          "code"
         ]
       },
       "financeSourse": {
@@ -408,10 +454,10 @@
         ],
         "description": "Должность (ref_doctor_position)"
       },
-      "reabilitation": {
+      "rehabilitation": {
         "title": "Реабилитация",
         "type": "object",
-        "description": "Реабилитация (ref_reabilitation)",
+        "description": "Реабилитация (ref_rehabilitation)",
         "properties": {
           "id": {
             "type": "integer",
@@ -658,7 +704,7 @@
             "type": "string",
             "description": "Имя"
           },
-          "patronomic": {
+          "patronymic": {
             "type": "string",
             "description": "Отчество"
           },
@@ -756,7 +802,7 @@
             "type": "string",
             "description": "Имя"
           },
-          "patronomic": {
+          "patronymic": {
             "type": "string",
             "description": "Отчество"
           },
@@ -1040,6 +1086,11 @@
           },
           "lastUserSave": {
             "$ref": "#/components/schemas/user"
+          },
+          "dateTalonWay": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата выдачи талонов на провезд"
           }
         },
         "required": [
@@ -1050,7 +1101,8 @@
           "dateObrPat",
           "upDate",
           "respFace",
-          "lastUserSave"
+          "lastUserSave",
+          "dateTalonWay"
         ]
       },
       "smpStage5": {
@@ -1163,7 +1215,7 @@
             "format": "date",
             "description": "Дата принятия решения"
           },
-          "reabilitationDone": {
+          "rehabilitationDone": {
             "type": "boolean",
             "description": "Реабилитация проведена"
           },
@@ -1176,8 +1228,8 @@
             "format": "date",
             "description": "Дата последнего сохранения"
           },
-          "reabilitation": {
-            "$ref": "#/components/schemas/reabilitation"
+          "rehabilitation": {
+            "$ref": "#/components/schemas/rehabilitation"
           },
           "respFace": {
             "$ref": "#/components/schemas/respFace"
@@ -1189,10 +1241,10 @@
         "required": [
           "id",
           "decisDate",
-          "reabilitationDone",
+          "rehabilitationDone",
           "patDeath",
           "upDate",
-          "reabilitation",
+          "rehabilitation",
           "respFace",
           "lastUserSave"
         ]
@@ -1200,7 +1252,7 @@
       "smpTalon": {
         "title": "Талан на СМП",
         "type": "object",
-        "description": "Талан на СМП (smp_talon)",
+        "description": "Талан на СМП (smp_talon), addressing = если у пациента есть талоны(не заблокированные и не отказные) по выбранному профилю в выбранную МО, то Повторное, если нет Первичное, если в талоне еще не заполнили 2 этап, то пусто",
         "properties": {
           "id": {
             "type": "integer",
@@ -1289,6 +1341,10 @@
           },
           "stage7": {
             "$ref": "#/components/schemas/smpStage7"
+          },
+          "addressing": {
+            "type": "string",
+            "description": "Обращение"
           }
         },
         "required": [
@@ -1385,6 +1441,54 @@
           "createdDate"
         ],
         "description": "Комментарий (smp_talon_comment)"
+      },
+      "file": {
+        "title": "Файл",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/fileType"
+          },
+          "file": {
+            "type": "string"
+          },
+          "lastUserSave": {
+            "$ref": "#/components/schemas/user"
+          },
+          "organization": {
+            "$ref": "#/components/schemas/organization"
+          },
+          "upDate": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "description": "Файл (link_patient_file)"
+      },
+      "fileType": {
+        "title": "Тип файла",
+        "type": "object",
+        "description": "Тип файла (ref_file_type)",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "name": {
+            "type": "string",
+            "description": "Наименование"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
       }
     }
   }
