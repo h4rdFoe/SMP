@@ -22,7 +22,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/InsuranceCompany_V1"
+                    "$ref": "#/components/schemas/insuranceCompany"
                   }
                 }
               }
@@ -55,7 +55,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Mkb10_V1"
+                    "$ref": "#/components/schemas/mkb10"
                   }
                 }
               }
@@ -87,7 +87,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Organization_V1"
+                    "$ref": "#/components/schemas/organization"
                   }
                 }
               }
@@ -127,7 +127,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/RespFace_V1"
+                    "$ref": "#/components/schemas/respFace"
                   }
                 }
               }
@@ -185,6 +185,40 @@
           }
         ]
       }
+    },
+    "/comment/{talonId}": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/talonComment"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-comments",
+        "parameters": []
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "integer"
+          },
+          "name": "talonId",
+          "in": "path",
+          "required": true,
+          "description": "Идентификатор талона"
+        }
+      ]
     }
   },
   "components": {
@@ -1323,259 +1357,34 @@
           "year"
         ]
       },
-      "InsuranceCompany_V1": {
-        "title": "Страховая компания",
-        "type": "object",
-        "description": "Страховая компания (ref_foms_insurance_company), \nID=id, SMOCOD=code, NAM_SMOP=fullName, NAM_SMOK = shaortName, ADDR_F=address",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "description": "УИ"
-          },
-          "code": {
-            "type": "string",
-            "description": "Код"
-          },
-          "nameFull": {
-            "type": "string",
-            "description": "Полное наименование"
-          },
-          "nameShort": {
-            "type": "string",
-            "description": "Краткое наименование"
-          },
-          "address": {
-            "type": "string",
-            "description": "Адрес"
-          }
-        },
-        "required": [
-          "id",
-          "code",
-          "nameFull",
-          "nameShort"
-        ]
-      },
-      "Mkb10_V1": {
-        "title": "Диагноз по МКБ-10",
+      "talonComment": {
+        "title": "Комментарий",
         "type": "object",
         "properties": {
           "id": {
             "type": "integer",
             "description": "УИ"
-          },
-          "code": {
-            "type": "string",
-            "description": "Код"
-          },
-          "name": {
-            "type": "string",
-            "description": "Наименование"
-          },
-          "parent": {
-            "type": "integer",
-            "description": "Родитель"
-          }
-        },
-        "required": [
-          "id",
-          "code",
-          "name"
-        ],
-        "description": "Диагноз по МКБ-10 (ref_mkb_10)"
-      },
-      "Organization_V1": {
-        "title": "Организация",
-        "type": "object",
-        "description": "Организация (ref_organization), \naddress = addrregionname + prefixarea + areaname + prefixstreet + streetname + house + building + struct",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "description": "УИ"
-          },
-          "oid": {
-            "type": "string",
-            "description": "ОИД"
-          },
-          "nameFull": {
-            "type": "string",
-            "description": "Полное наименование"
-          },
-          "nameShort": {
-            "type": "string",
-            "description": "Краткое наименование"
-          },
-          "subject": {
-            "type": "integer",
-            "description": "Субъект РФ по конституции"
-          },
-          "address": {
-            "type": "string",
-            "description": "Адрес"
-          }
-        },
-        "required": [
-          "id",
-          "oid",
-          "nameFull",
-          "nameShort",
-          "subject"
-        ]
-      },
-      "Position_V1": {
-        "title": "Должность",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "description": "УИ"
-          },
-          "parent": {
-            "type": "integer",
-            "description": "Родитель"
-          },
-          "name": {
-            "type": "string",
-            "description": "Наименование"
-          }
-        },
-        "required": [
-          "id",
-          "parent",
-          "name"
-        ],
-        "description": "Должность (ref_doctor_position)"
-      },
-      "RespFaceStatus_V1": {
-        "title": "Статус проверки должностных лиц",
-        "type": "object",
-        "description": "Статус проверки должностных лиц (ref_doctor_status_validate)",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "description": "УИ"
-          },
-          "name": {
-            "type": "string",
-            "description": "Наименование"
-          }
-        },
-        "required": [
-          "id",
-          "name"
-        ]
-      },
-      "RespFace_V1": {
-        "title": "Должностное лица",
-        "type": "object",
-        "description": "Должностное лица (resp_face)",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "description": "УИ"
-          },
-          "surname": {
-            "type": "string",
-            "description": "Фамилия"
-          },
-          "name": {
-            "type": "string",
-            "description": "Имя"
-          },
-          "patronomic": {
-            "type": "string",
-            "description": "Отчество"
-          },
-          "phone": {
-            "type": "string",
-            "description": "Номер телефона"
-          },
-          "email": {
-            "type": "string",
-            "description": "e-mail"
-          },
-          "status": {
-            "$ref": "#/components/schemas/RespFaceStatus_V1"
-          },
-          "snils": {
-            "type": "string",
-            "description": "СНИЛС"
-          },
-          "organization": {
-            "$ref": "#/components/schemas/Organization_V1"
           },
           "createdDate": {
             "type": "string",
             "format": "date",
-            "description": "Дата созданич"
+            "description": "Дата создания"
           },
-          "upDate": {
-            "type": "string",
-            "format": "date",
-            "description": "Дата последнего сохраненич"
+          "user": {
+            "$ref": "#/components/schemas/user"
           },
-          "position": {
-            "$ref": "#/components/schemas/Position_V1"
+          "stage": {
+            "type": "integer"
           },
-          "possiblePositions": {
-            "type": "array",
-            "description": "Возможные роли",
-            "items": {
-              "$ref": "#/components/schemas/Position_V1"
-            }
-          },
-          "lastUserSave": {
-            "$ref": "#/components/schemas/User_V1"
+          "body": {
+            "type": "string"
           }
         },
         "required": [
-          "surname",
-          "name",
-          "status",
-          "snils",
-          "organization",
-          "createdDate",
-          "upDate",
-          "position",
-          "lastUserSave"
-        ]
-      },
-      "User_V1": {
-        "title": "Пользователь",
-        "type": "object",
-        "description": "Пользователь (ias_user)",
-        "properties": {
-          "snils": {
-            "type": "string",
-            "description": "СНИЛС"
-          },
-          "surname": {
-            "type": "string",
-            "description": "Фамилия"
-          },
-          "name": {
-            "type": "string",
-            "description": "Имя"
-          },
-          "patronomic": {
-            "type": "string",
-            "description": "Отчество"
-          },
-          "organization": {
-            "$ref": "#/components/schemas/Organization_V1"
-          },
-          "entryDate": {
-            "type": "string",
-            "format": "date",
-            "description": "Дата первого входа"
-          }
-        },
-        "required": [
-          "snils",
-          "surname",
-          "name",
-          "entryDate"
-        ]
+          "id",
+          "createdDate"
+        ],
+        "description": "Комментарий (smp_talon_comment)"
       }
     }
   }
