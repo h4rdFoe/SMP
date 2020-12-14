@@ -1271,10 +1271,6 @@
             "type": "boolean",
             "description": "Признак активности"
           },
-          "listWait": {
-            "type": "boolean",
-            "description": "Признак нахождения в ЛО"
-          },
           "dateFromLw": {
             "type": "string",
             "format": "date",
@@ -1352,7 +1348,6 @@
           "issueDate",
           "uniqNumber",
           "isEnabled",
-          "listWait",
           "dateFromLw",
           "hospNextYear",
           "financeSource",
