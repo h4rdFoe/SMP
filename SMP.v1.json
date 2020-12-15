@@ -111,8 +111,17 @@
             "in": "query",
             "name": "profileId",
             "description": "Поиск по профилю"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "smp",
+            "description": "Оказание СМП"
           }
-        ]
+        ],
+        "description": ""
       }
     },
     "/respFace": {
@@ -395,7 +404,7 @@
       "organization": {
         "title": "Организация",
         "type": "object",
-        "description": "Организация (ref_organization), \naddress = addrregionname + prefixarea + areaname + prefixstreet + streetname + house + building + struct",
+        "description": "Организация (ref_organization), \naddress = addrregionname + prefixarea + areaname + prefixstreet + streetname + house + building + struct, Список всех организаций на бэке должен иметь атрибут smp - оказание смп (МО из link_smp_mo) и profiles - профили СМП (те, у кого smp = true, а список профилей из link_mo_profile)",
         "properties": {
           "id": {
             "type": "integer",
