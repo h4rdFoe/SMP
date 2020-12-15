@@ -231,7 +231,7 @@
     },
     "/file": {
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "Получение файлов",
         "tags": [],
         "responses": {
           "200": {
