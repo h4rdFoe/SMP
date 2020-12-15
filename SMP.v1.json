@@ -121,7 +121,7 @@
             "description": "Оказание СМП"
           }
         ],
-        "description": ""
+        "description": "если указали profileId, то отправляем запрос в https://nr-test.egisz.rosminzdrav.ru/rest/lic/get?service=1888 и режем список пришедшими МО"
       }
     },
     "/respFace": {
@@ -404,7 +404,7 @@
       "organization": {
         "title": "Организация",
         "type": "object",
-        "description": "Организация (ref_organization), \naddress = addrregionname + prefixarea + areaname + prefixstreet + streetname + house + building + struct, Список всех организаций на бэке должен иметь атрибут smp - оказание смп (МО из link_smp_mo) и profiles - профили СМП (те, у кого smp = true, а список профилей из link_mo_profile)",
+        "description": "Организация (ref_organization), \naddress = addrregionname + prefixarea + areaname + prefixstreet + streetname + house + building + struct, Список всех организаций на бэке должен иметь атрибут smp - оказание смп (МО из link_smp_mo)",
         "properties": {
           "id": {
             "type": "integer",
