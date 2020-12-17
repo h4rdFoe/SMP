@@ -324,21 +324,21 @@
       "hospitalResult": {
         "title": "Результат госпитализации",
         "type": "object",
+        "description": "Результат госпитализации (ref_hospital_result)",
         "properties": {
           "id": {
             "type": "integer",
             "description": "УИ"
           },
           "name": {
-            "type": "integer",
-            "description": "Наименование"
+            "description": "Наименование",
+            "type": "string"
           }
         },
         "required": [
           "id",
           "name"
-        ],
-        "description": "Результат госпитализации (ref_hospital_result)"
+        ]
       },
       "insuranceCompany": {
         "title": "Страховая компания",
@@ -659,6 +659,7 @@
       "fiasAddress": {
         "title": "Адрес",
         "type": "object",
+        "description": "Адрес (fias_address)",
         "properties": {
           "id": {
             "type": "integer",
@@ -672,7 +673,7 @@
             "type": "string",
             "description": "Номер дома"
           },
-          "HousingNumber": {
+          "housingNumber": {
             "type": "string",
             "description": "Корпус"
           },
@@ -693,8 +694,7 @@
           "id",
           "addressName",
           "homeNumber"
-        ],
-        "description": "Адрес (fias_address)"
+        ]
       },
       "patient": {
         "title": "Пациент",
@@ -727,11 +727,11 @@
             "description": "Дата рождения"
           },
           "isEnabled": {
-            "type": "string",
-            "description": "Признак актуальности"
+            "description": "Признак актуальности",
+            "type": "boolean"
           },
           "sex": {
-            "type": "string",
+            "type": "integer",
             "description": "Пол"
           },
           "orgSave": {
@@ -774,7 +774,7 @@
             "type": "string",
             "description": "Имя"
           },
-          "patronomic": {
+          "patronymic": {
             "type": "string",
             "description": "Отчество"
           },
