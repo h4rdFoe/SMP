@@ -1729,7 +1729,7 @@
         ]
       },
       "patientTalon": {
-        "title": "patientTalon",
+        "title": "Талоны пациента",
         "type": "object",
         "description": "Талоны пациента (smp_talon): \nid:smp_talon.id;\nuniqNum:smp_talon.uniq_number;",
         "properties": {
