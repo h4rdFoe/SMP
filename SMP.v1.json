@@ -269,6 +269,233 @@
           }
         ]
       }
+    },
+    "/patients": {
+      "get": {
+        "summary": "Получение списка пациентов",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "patients": {
+                      "type": "array",
+                      "description": "Массив пациентов удовлетворяющих критерию поиска",
+                      "items": {
+                        "$ref": "#/components/schemas/patient"
+                      }
+                    },
+                    "count": {
+                      "type": "integer",
+                      "description": "Общее количество пациентов удовлетворяющих критерию поиска"
+                    }
+                  },
+                  "required": [
+                    "patients",
+                    "count"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-patients",
+        "description": "",
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": "30"
+            },
+            "in": "query",
+            "name": "pagesize",
+            "description": "Количество строк для вывода на одной странице",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "page",
+            "description": "Номер страницы",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "id"
+            },
+            "in": "query",
+            "name": "sort",
+            "description": "Поле сортировки"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "desc"
+            },
+            "in": "query",
+            "name": "sort_dir",
+            "description": "Направление сортировки"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "unqId",
+            "description": "УИ пациента"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "firstName",
+            "description": "Имя"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "lastName",
+            "description": "Фамилия"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "patronymic",
+            "description": "Отчество"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "snils",
+            "description": "СНИЛС"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "birthdate_from",
+            "description": "Дата рождения от (включительно)"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "birthdate_to",
+            "description": "Дата рождения до (включительно)"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "sex",
+            "description": "Пол пациента (1 - мужской, 2 - женский)"
+          }
+        ]
+      }
+    },
+    "/patients-export": {
+      "get": {
+        "summary": "Получение файла Ecxel с выгрузкой пациентов",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "Файл экспорта поиска карт пациентов"
+          }
+        },
+        "operationId": "get-patients",
+        "description": "",
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "unqId",
+            "description": "УИ пациента"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "firstName",
+            "description": "Имя"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "lastName",
+            "description": "Фамилия"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "patronymic",
+            "description": "Отчество"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "snils",
+            "description": "СНИЛС"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "birthdate_from",
+            "description": "Дата рождения от (включительно)"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "birthdate_to",
+            "description": "Дата рождения до (включительно)"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "sex",
+            "description": "Пол пациента"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "format",
+            "description": "Формат выгружаемого файла (1 - xls, 2 - xlsx)"
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -743,6 +970,12 @@
           },
           "lastUserSave": {
             "$ref": "#/components/schemas/user"
+          },
+          "patientTalons": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/patientTalon"
+            }
           }
         },
         "required": [
@@ -1494,6 +1727,21 @@
           "id",
           "name"
         ]
+      },
+      "patientTalon": {
+        "title": "patientTalon",
+        "type": "object",
+        "description": "Талоны пациента (smp_talon): \nid:smp_talon.id;\nuniqNum:smp_talon.uniq_number;",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "uniqNum": {
+            "type": "string",
+            "description": "Номер талона"
+          }
+        }
       }
     }
   }
