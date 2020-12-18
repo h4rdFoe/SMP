@@ -840,6 +840,28 @@
         },
         "operationId": "get-smpProfile"
       }
+    },
+    "/territory": {
+      "get": {
+        "summary": "Получение списка Субъектов РФ",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/territory"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-territory"
+      }
     }
   },
   "components": {
