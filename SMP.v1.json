@@ -796,6 +796,50 @@
           }
         ]
       }
+    },
+    "/smpStatus": {
+      "get": {
+        "summary": "Получение списка статусов талона на СМП",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/smpStatus"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-smpStatus"
+      }
+    },
+    "/smpProfile": {
+      "get": {
+        "summary": "Получение профилей СМП",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/smpProfile"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-smpProfile"
+      }
     }
   },
   "components": {
