@@ -496,6 +496,306 @@
           }
         ]
       }
+    },
+    "/talons": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": ""
+                  }
+                }
+              }
+            }
+          },
+          "": {
+            "description": "Массив талонов пациента, удовлетворяющих критериям поиска и ACL",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/smpTalon"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-smpTalons",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "pagesize",
+            "description": "Количество строк для вывода на одной странице"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "page",
+            "description": "Номер страницы"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "sort",
+            "description": "Поле сортировки"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "sort_dir",
+            "description": "Направление сортировки"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "uniqId",
+            "description": "УИ талона"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "uniqNumber",
+            "description": "Номер талона"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "issueDate_from",
+            "description": "Дата оформления талона от (включительно)"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "issueDate_to",
+            "description": "Дата оформления талона до (включительно)"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "status",
+            "description": "УИ Статуса талона на СМП "
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "profile",
+            "description": "УИ Профиля СМП"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "orgSend_subject",
+            "description": "УИ Региона Направившей организации"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "orgSend",
+            "description": "УИ Направившей организации"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "mo",
+            "description": "УИ МО направления (2 этап)"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "diagNapr",
+            "description": "УИ Диагноза при направлении"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "diagVip",
+            "description": "УИ Диагноза при выписке"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "insuranceCompany",
+            "description": "УИ Страховой компании пациента"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "numPolis",
+            "description": "Номер полиса пациента"
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/talons-export": {
+      "get": {
+        "summary": "Получение файла Ecxel с выгрузкой талонов",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "Файл экспорта поиска карт пациентов"
+          }
+        },
+        "operationId": "get-talons-export",
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "uniqId",
+            "description": "УИ талона"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "uniqNumber",
+            "description": "Номер талона"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "issueDate_from",
+            "description": "Дата оформления талона от (включительно)"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "issueDate_to",
+            "description": "Дата оформления талона до (включительно)"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "status",
+            "description": "УИ Статуса талона на СМП "
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "profile",
+            "description": "УИ Профиля СМП"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "orgSend_subject",
+            "description": "УИ Региона Направившей организации"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "orgSend",
+            "description": "УИ Направившей организации"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "mo",
+            "description": "УИ МО направления (2 этап)"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "diagNapr",
+            "description": "УИ Диагноза при направлении"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "diagVip",
+            "description": "УИ Диагноза при выписке"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "insuranceCompany",
+            "description": "УИ Страховой компании пациента"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "numPolis",
+            "description": "Номер полиса пациента"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "format",
+            "description": "Формат выгружаемого файла (1 - xls, 2 - xlsx)"
+          }
+        ]
+      }
     }
   },
   "components": {
