@@ -1373,6 +1373,7 @@
       "taskStageCount": {
         "title": "Остаток объемов",
         "type": "object",
+        "description": "Остаток объемов (smp_task_stage)",
         "properties": {
           "mo": {
             "$ref": "#/components/schemas/organization"
@@ -1390,24 +1391,14 @@
                 "profile": {
                   "$ref": "#/components/schemas/smpProfile"
                 },
-                "listWait": {
-                  "type": "integer",
-                  "description": "В ЛО"
-                },
                 "balance": {
                   "type": "integer",
                   "description": "Остаток"
-                },
-                "onTreatment": {
-                  "type": "integer",
-                  "description": "На лечении"
                 }
               },
               "required": [
                 "profile",
-                "listWait",
-                "balance",
-                "onTreatment"
+                "balance"
               ]
             }
           }
@@ -1415,8 +1406,7 @@
         "required": [
           "mo",
           "year"
-        ],
-        "description": "Остаток объемов (smp_task_stage)"
+        ]
       },
       "talonComment": {
         "title": "Комментарий",
