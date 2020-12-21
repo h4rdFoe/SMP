@@ -37,7 +37,25 @@
             },
             "in": "query",
             "name": "name",
-            "description": "Наименование"
+            "description": "Поиск по кратком и полному наименованию"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "1"
+            },
+            "in": "query",
+            "description": "Номер страницы",
+            "name": "page"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "10"
+            },
+            "in": "query",
+            "name": "page_size",
+            "description": "Количество строк для вывода на одной странице"
           }
         ]
       },
@@ -71,6 +89,20 @@
             "in": "query",
             "name": "name",
             "description": "Поиск по коду + наименование"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "page"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "page_size"
           }
         ]
       }
@@ -119,6 +151,14 @@
             "in": "query",
             "name": "smp",
             "description": "Оказание СМП"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "regionId",
+            "description": "УИ Региона МО"
           }
         ],
         "description": "если указали profileId, то отправляем запрос в https://nr-test.egisz.rosminzdrav.ru/rest/lic/get?service=1888 и режем список пришедшими МО"
@@ -499,7 +539,7 @@
     },
     "/talons": {
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "Получение списка талонов",
         "tags": [],
         "responses": {
           "200": {
