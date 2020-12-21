@@ -631,7 +631,7 @@
       "organization": {
         "title": "Организация",
         "type": "object",
-        "description": "Организация (ref_organization), \naddress = addrregionname + prefixarea + areaname + prefixstreet + streetname + house + building + struct, Список всех организаций на бэке должен иметь атрибут smp - оказание смп (МО из link_smp_mo)",
+        "description": "Организация (ref_organization), \naddress = addrregionname + prefixarea + areaname + prefixstreet + streetname + house + building + struct, Список всех организаций на бэке должен иметь атрибут smp - оказание смп (МО из link_organization с типом принимающая МО)",
         "properties": {
           "id": {
             "type": "integer",
