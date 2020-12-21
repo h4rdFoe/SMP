@@ -37,7 +37,25 @@
             },
             "in": "query",
             "name": "name",
-            "description": "Наименование"
+            "description": "Поиск по кратком и полному наименованию"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "1"
+            },
+            "in": "query",
+            "description": "Номер страницы",
+            "name": "page"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "10"
+            },
+            "in": "query",
+            "name": "page_size",
+            "description": "Количество строк для вывода на одной странице"
           }
         ]
       },
@@ -71,6 +89,20 @@
             "in": "query",
             "name": "name",
             "description": "Поиск по коду + наименование"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "page"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "page_size"
           }
         ]
       }
@@ -119,6 +151,14 @@
             "in": "query",
             "name": "smp",
             "description": "Оказание СМП"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "regionId",
+            "description": "УИ Региона МО"
           }
         ],
         "description": "если указали profileId, то отправляем запрос в https://nr-test.egisz.rosminzdrav.ru/rest/lic/get?service=1888 и режем список пришедшими МО"
@@ -495,6 +535,372 @@
             "description": "Формат выгружаемого файла (1 - xls, 2 - xlsx)"
           }
         ]
+      }
+    },
+    "/talons": {
+      "get": {
+        "summary": "Получение списка талонов",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": ""
+                  }
+                }
+              }
+            }
+          },
+          "": {
+            "description": "Массив талонов пациента, удовлетворяющих критериям поиска и ACL",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/smpTalon"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-smpTalons",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "pagesize",
+            "description": "Количество строк для вывода на одной странице"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "page",
+            "description": "Номер страницы"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "sort",
+            "description": "Поле сортировки"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "sort_dir",
+            "description": "Направление сортировки"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "uniqId",
+            "description": "УИ талона"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "uniqNumber",
+            "description": "Номер талона"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "issueDate_from",
+            "description": "Дата оформления талона от (включительно)"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "issueDate_to",
+            "description": "Дата оформления талона до (включительно)"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "status",
+            "description": "УИ Статуса талона на СМП "
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "profile",
+            "description": "УИ Профиля СМП"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "orgSend_subject",
+            "description": "УИ Региона Направившей организации"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "orgSend",
+            "description": "УИ Направившей организации"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "mo",
+            "description": "УИ МО направления (2 этап)"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "diagNapr",
+            "description": "УИ Диагноза при направлении"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "diagVip",
+            "description": "УИ Диагноза при выписке"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "insuranceCompany",
+            "description": "УИ Страховой компании пациента"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "numPolis",
+            "description": "Номер полиса пациента"
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/talons-export": {
+      "get": {
+        "summary": "Получение файла Ecxel с выгрузкой талонов",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "Файл экспорта поиска карт пациентов"
+          }
+        },
+        "operationId": "get-talons-export",
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "uniqId",
+            "description": "УИ талона"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "uniqNumber",
+            "description": "Номер талона"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "issueDate_from",
+            "description": "Дата оформления талона от (включительно)"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "issueDate_to",
+            "description": "Дата оформления талона до (включительно)"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "status",
+            "description": "УИ Статуса талона на СМП "
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "profile",
+            "description": "УИ Профиля СМП"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "orgSend_subject",
+            "description": "УИ Региона Направившей организации"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "orgSend",
+            "description": "УИ Направившей организации"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "mo",
+            "description": "УИ МО направления (2 этап)"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "diagNapr",
+            "description": "УИ Диагноза при направлении"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "diagVip",
+            "description": "УИ Диагноза при выписке"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "insuranceCompany",
+            "description": "УИ Страховой компании пациента"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "numPolis",
+            "description": "Номер полиса пациента"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "format",
+            "description": "Формат выгружаемого файла (1 - xls, 2 - xlsx)"
+          }
+        ]
+      }
+    },
+    "/smpStatus": {
+      "get": {
+        "summary": "Получение списка статусов талона на СМП",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/smpStatus"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-smpStatus"
+      }
+    },
+    "/smpProfile": {
+      "get": {
+        "summary": "Получение профилей СМП",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/smpProfile"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-smpProfile"
+      }
+    },
+    "/territory": {
+      "get": {
+        "summary": "Получение списка Субъектов РФ",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/territory"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-territory"
       }
     }
   },
