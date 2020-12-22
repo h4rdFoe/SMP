@@ -1556,9 +1556,12 @@
         },
         "required": [
           "id",
+          "phoneNumber",
           "readyUsedate",
+          "numPolis",
           "upDate",
           "fias",
+          "insuranceCompany",
           "benefit",
           "socialGroup",
           "lastUserSave"
