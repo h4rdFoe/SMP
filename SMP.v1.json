@@ -1364,8 +1364,7 @@
             "type": "boolean"
           },
           "sex": {
-            "type": "integer",
-            "description": "Пол"
+            "$ref": "#/components/schemas/sex"
           },
           "orgSave": {
             "$ref": "#/components/schemas/organization"
@@ -2141,6 +2140,25 @@
             "description": "Номер талона"
           }
         }
+      },
+      "sex": {
+        "title": "Пол",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "name": {
+            "type": "string",
+            "description": "Наименование"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "description": "ref_sex все кроме неопределенного"
       }
     }
   }
