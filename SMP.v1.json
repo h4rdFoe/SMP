@@ -1045,7 +1045,7 @@
       "organization": {
         "title": "Организация",
         "type": "object",
-        "description": "Организация (ref_organization), \naddress = addrregionname + prefixarea + areaname + prefixstreet + streetname + house + building + struct, Список всех организаций на бэке должен иметь атрибут smp - оказание смп (МО из link_smp_mo)",
+        "description": "Организация (ref_organization), \naddress = addrregionname + prefixarea + areaname + prefixstreet + streetname + house + building + struct, Список всех организаций на бэке должен иметь атрибут smp - оказание смп (МО из link_organization с типом принимающая МО)",
         "properties": {
           "id": {
             "type": "integer",
@@ -1372,8 +1372,7 @@
             "type": "boolean"
           },
           "sex": {
-            "type": "integer",
-            "description": "Пол"
+            "$ref": "#/components/schemas/sex"
           },
           "orgSave": {
             "$ref": "#/components/schemas/organization"
@@ -1564,9 +1563,12 @@
         },
         "required": [
           "id",
+          "phoneNumber",
           "readyUsedate",
+          "numPolis",
           "upDate",
           "fias",
+          "insuranceCompany",
           "benefit",
           "socialGroup",
           "lastUserSave"
@@ -2146,6 +2148,25 @@
             "description": "Номер талона"
           }
         }
+      },
+      "sex": {
+        "title": "Пол",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "name": {
+            "type": "string",
+            "description": "Наименование"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "description": "ref_sex все кроме неопределенного"
       }
     }
   }
