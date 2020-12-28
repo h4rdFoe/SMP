@@ -902,6 +902,14 @@
         },
         "operationId": "get-territory"
       }
+    },
+    "/ref-sex": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-ref-sex"
+      }
     }
   },
   "components": {
