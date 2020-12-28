@@ -938,7 +938,7 @@
       "financeSourse": {
         "title": "Источник финансирования",
         "type": "object",
-        "description": "Источник финансирования (ref_finance_sourse)",
+        "description": "Источник финансирования (ref_smp_finance_sourse)",
         "properties": {
           "id": {
             "type": "integer",
@@ -1175,14 +1175,15 @@
       "smpProfile": {
         "title": "Профиль СМП",
         "type": "object",
+        "description": "Профиль СМП (ref_smp_profile)",
         "properties": {
           "id": {
-            "type": "integer",
-            "description": "УИ"
+            "description": "УИ",
+            "type": "string"
           },
-          "code": {
+          "parent": {
             "type": "string",
-            "description": "Код"
+            "description": "Родитель"
           },
           "name": {
             "type": "string",
@@ -1191,10 +1192,9 @@
         },
         "required": [
           "id",
-          "code",
+          "parent",
           "name"
-        ],
-        "description": "Профиль СМП (ref_smp_profile)"
+        ]
       },
       "smpStatus": {
         "title": "Статус талона на СМП",
