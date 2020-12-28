@@ -923,13 +923,9 @@
             "type": "integer",
             "description": "УИ"
           },
-          "nameShort": {
+          "name": {
             "type": "string",
             "description": "Краткое наименование"
-          },
-          "nameFull": {
-            "type": "string",
-            "description": "Полное наименование"
           },
           "code": {
             "type": "string",
@@ -938,8 +934,7 @@
         },
         "required": [
           "id",
-          "nameShort",
-          "nameFull",
+          "name",
           "code"
         ]
       },
