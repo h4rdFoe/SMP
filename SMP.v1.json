@@ -905,9 +905,23 @@
     },
     "/ref-sex": {
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "Получение справочника Пол пациента",
         "tags": [],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/sex"
+                  }
+                }
+              }
+            }
+          }
+        },
         "operationId": "get-ref-sex"
       }
     }
@@ -2160,7 +2174,7 @@
           "id",
           "name"
         ],
-        "description": "ref_sex все кроме неопределенного"
+        "description": "ref_sex (все, кроме Неопределенный)"
       }
     }
   }
