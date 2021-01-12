@@ -1568,6 +1568,10 @@
           },
           "lastUserSave": {
             "$ref": "#/components/schemas/user"
+          },
+          "serPolis": {
+            "type": "string",
+            "description": "Серия полиса"
           }
         },
         "required": [
