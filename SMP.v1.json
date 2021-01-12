@@ -388,7 +388,7 @@
               "type": "integer"
             },
             "in": "query",
-            "name": "unqId",
+            "name": "id",
             "description": "УИ пациента"
           },
           {
@@ -396,7 +396,7 @@
               "type": "string"
             },
             "in": "query",
-            "name": "firstName",
+            "name": "name",
             "description": "Имя"
           },
           {
@@ -404,7 +404,7 @@
               "type": "string"
             },
             "in": "query",
-            "name": "lastName",
+            "name": "surname",
             "description": "Фамилия"
           },
           {
@@ -467,7 +467,7 @@
               "type": "integer"
             },
             "in": "query",
-            "name": "unqId",
+            "name": "id",
             "description": "УИ пациента"
           },
           {
@@ -475,7 +475,7 @@
               "type": "string"
             },
             "in": "query",
-            "name": "firstName",
+            "name": "name",
             "description": "Имя"
           },
           {
@@ -483,7 +483,7 @@
               "type": "string"
             },
             "in": "query",
-            "name": "lastName",
+            "name": "surname",
             "description": "Фамилия"
           },
           {
@@ -923,6 +923,29 @@
           }
         },
         "operationId": "get-ref-sex"
+      }
+    },
+    "/patient-document-types": {
+      "get": {
+        "summary": "Получение типов ДУЛ",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/documentType"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-patient-document-types",
+        "description": ""
       }
     }
   },
@@ -1397,6 +1420,15 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/patientTalon"
+            }
+          },
+          "identityDocuments": {
+            "type": [
+              "string",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/IdentityDocument"
             }
           }
         },
@@ -2179,6 +2211,84 @@
           "name"
         ],
         "description": "ref_sex (все, кроме Неопределенный)"
+      },
+      "IdentityDocument": {
+        "title": "ДУЛ",
+        "type": "object",
+        "description": "Таблица identity_document",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "УИ"
+          },
+          "series": {
+            "type": "string",
+            "description": "Серия"
+          },
+          "number": {
+            "type": "string",
+            "description": "Номер"
+          },
+          "issuedBy": {
+            "type": "string",
+            "description": "Кем выдан"
+          },
+          "issuedDate": {
+            "type": "string",
+            "description": "Когда выдан"
+          },
+          "isEnabled": {
+            "type": "boolean",
+            "description": "Признак активности"
+          },
+          "type": {
+            "$ref": "#/components/schemas/documentType"
+          }
+        }
+      },
+      "documentType": {
+        "title": "Тип ДУЛ",
+        "type": "object",
+        "description": "Таблица ref_document_type",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "order": {
+            "type": "string"
+          },
+          "link": {
+            "$ref": "#/components/schemas/linkDocumentType"
+          }
+        }
+      },
+      "linkDocumentType": {
+        "title": "Валидация ДУЛ",
+        "type": "object",
+        "description": "Таблица link_idntity_document",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "entryDate": {
+            "type": "string"
+          },
+          "validationSerial": {
+            "type": "string"
+          },
+          "validationNumber": {
+            "type": "string"
+          },
+          "documentSerial": {
+            "type": "boolean"
+          }
+        }
       }
     }
   }
