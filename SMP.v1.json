@@ -71,10 +71,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/mkb10"
-                  }
+                  "$ref": "#/components/schemas/mkb10"
                 }
               }
             }
@@ -349,7 +346,7 @@
           {
             "schema": {
               "type": "integer",
-              "default": "30"
+              "default": 30
             },
             "in": "query",
             "name": "pagesize",
@@ -459,7 +456,7 @@
             "description": "Файл экспорта поиска карт пациентов"
           }
         },
-        "operationId": "get-patients",
+        "operationId": "get_patients",
         "description": "",
         "parameters": [
           {
@@ -549,24 +546,734 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": ""
-                  }
-                }
-              }
-            }
-          },
-          "": {
-            "description": "Массив талонов пациента, удовлетворяющих критериям поиска и ACL",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
                     "$ref": "#/components/schemas/smpTalon"
                   }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": [
+                      {
+                        "id": 0,
+                        "issueDate": "2019-08-24",
+                        "uniqNumber": "string",
+                        "isEnabled": true,
+                        "dateFromLw": "2019-08-24",
+                        "hospNextYear": true,
+                        "financeSource": {
+                          "id": 0,
+                          "name": "string"
+                        },
+                        "orgSend": {
+                          "id": 0,
+                          "oid": "string",
+                          "nameFull": "string",
+                          "nameShort": "string",
+                          "subject": 0,
+                          "address": "string"
+                        },
+                        "patient": {
+                          "id": 0,
+                          "surname": "string",
+                          "name": "string",
+                          "patronymic": "string",
+                          "snils": "string",
+                          "birthdate": "2019-08-24",
+                          "isEnabled": true,
+                          "sex": {
+                            "id": 0,
+                            "name": "string"
+                          },
+                          "orgSave": {
+                            "id": 0,
+                            "oid": "string",
+                            "nameFull": "string",
+                            "nameShort": "string",
+                            "subject": 0,
+                            "address": "string"
+                          },
+                          "upDate": "2019-08-24",
+                          "lastUserSave": {
+                            "snils": "string",
+                            "surname": "string",
+                            "name": "string",
+                            "patronymic": "string",
+                            "organization": {
+                              "id": 0,
+                              "oid": "string",
+                              "nameFull": "string",
+                              "nameShort": "string",
+                              "subject": 0,
+                              "address": "string"
+                            },
+                            "entryDate": "2019-08-24"
+                          },
+                          "patientTalons": [
+                            {
+                              "id": 0,
+                              "uniqNum": "string"
+                            }
+                          ],
+                          "identityDocuments": [
+                            {
+                              "id": 0,
+                              "series": "string",
+                              "number": "string",
+                              "issuedBy": "string",
+                              "issuedDate": "string",
+                              "isEnabled": true,
+                              "doc_type": {
+                                "id": 0,
+                                "code": "string",
+                                "name": "string",
+                                "order": "string",
+                                "link": {
+                                  "id": 0,
+                                  "entryDate": "string",
+                                  "validationSerial": "string",
+                                  "validationNumber": "string",
+                                  "documentSerial": true
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "subject": {
+                          "codeOkato": 0,
+                          "codeConstitution": 0,
+                          "name": "string",
+                          "codeFo": 0
+                        },
+                        "status": {
+                          "id": 0,
+                          "name": "string"
+                        },
+                        "cancelReason": {
+                          "id": 0,
+                          "name": "string"
+                        },
+                        "canceledStatus": {
+                          "id": 0,
+                          "name": "string"
+                        },
+                        "respFace": {
+                          "id": 0,
+                          "surname": "string",
+                          "name": "string",
+                          "patronymic": "string",
+                          "phone": "string",
+                          "email": "string",
+                          "status": {
+                            "id": 0,
+                            "name": "string"
+                          },
+                          "snils": "string",
+                          "organization": {
+                            "id": 0,
+                            "oid": "string",
+                            "nameFull": "string",
+                            "nameShort": "string",
+                            "subject": 0,
+                            "address": "string"
+                          },
+                          "createdDate": "2019-08-24",
+                          "upDate": "2019-08-24",
+                          "position": {
+                            "id": 0,
+                            "parent": 0,
+                            "name": "string"
+                          },
+                          "possiblePositions": [
+                            {
+                              "id": 0,
+                              "parent": 0,
+                              "name": "string"
+                            }
+                          ],
+                          "lastUserSave": {
+                            "snils": "string",
+                            "surname": "string",
+                            "name": "string",
+                            "patronymic": "string",
+                            "organization": {
+                              "id": 0,
+                              "oid": "string",
+                              "nameFull": "string",
+                              "nameShort": "string",
+                              "subject": 0,
+                              "address": "string"
+                            },
+                            "entryDate": "2019-08-24"
+                          }
+                        },
+                        "createdDate": "2019-08-24",
+                        "upDate": "2019-08-24",
+                        "lastUserSave": {
+                          "snils": "string",
+                          "surname": "string",
+                          "name": "string",
+                          "patronymic": "string",
+                          "organization": {
+                            "id": 0,
+                            "oid": "string",
+                            "nameFull": "string",
+                            "nameShort": "string",
+                            "subject": 0,
+                            "address": "string"
+                          },
+                          "entryDate": "2019-08-24"
+                        },
+                        "stage1": {
+                          "id": 0,
+                          "phoneNumber": "string",
+                          "readyUsedate": true,
+                          "numPolis": "string",
+                          "email": "string",
+                          "upDate": "2019-08-24",
+                          "fias": {
+                            "id": 0,
+                            "addressName": "string",
+                            "homeNumber": "string",
+                            "housingNumber": "string",
+                            "flatNumber": "string",
+                            "postIndex": "string",
+                            "buildingNumber": "string"
+                          },
+                          "insuranceCompany": {
+                            "id": 0,
+                            "code": "string",
+                            "nameFull": "string",
+                            "nameShort": "string",
+                            "address": "string"
+                          },
+                          "benefit": {
+                            "id": 0,
+                            "name": "string",
+                            "code": "string"
+                          },
+                          "socialGroup": {
+                            "id": 0,
+                            "name": "string",
+                            "code": "string",
+                            "parent": 0
+                          },
+                          "lastUserSave": {
+                            "snils": "string",
+                            "surname": "string",
+                            "name": "string",
+                            "patronymic": "string",
+                            "organization": {
+                              "id": 0,
+                              "oid": "string",
+                              "nameFull": "string",
+                              "nameShort": "string",
+                              "subject": 0,
+                              "address": "string"
+                            },
+                            "entryDate": "2019-08-24"
+                          },
+                          "serPolis": "string"
+                        },
+                        "stage2": {
+                          "id": 0,
+                          "decisDate": "2019-08-24",
+                          "isReturned": true,
+                          "dateReceiptDocMu": "2019-08-24",
+                          "upDate": "2019-08-24",
+                          "mkb10": {
+                            "id": 0,
+                            "code": "string",
+                            "name": "string",
+                            "parent": 0
+                          },
+                          "accompanyingIllness": [
+                            {
+                              "id": 0,
+                              "code": "string",
+                              "name": "string",
+                              "parent": 0
+                            }
+                          ],
+                          "profile": {
+                            "id": "string",
+                            "parent": "string",
+                            "name": "string"
+                          },
+                          "mo": {
+                            "id": 0,
+                            "oid": "string",
+                            "nameFull": "string",
+                            "nameShort": "string",
+                            "subject": 0,
+                            "address": "string"
+                          },
+                          "respFace": {
+                            "id": 0,
+                            "surname": "string",
+                            "name": "string",
+                            "patronymic": "string",
+                            "phone": "string",
+                            "email": "string",
+                            "status": {
+                              "id": 0,
+                              "name": "string"
+                            },
+                            "snils": "string",
+                            "organization": {
+                              "id": 0,
+                              "oid": "string",
+                              "nameFull": "string",
+                              "nameShort": "string",
+                              "subject": 0,
+                              "address": "string"
+                            },
+                            "createdDate": "2019-08-24",
+                            "upDate": "2019-08-24",
+                            "position": {
+                              "id": 0,
+                              "parent": 0,
+                              "name": "string"
+                            },
+                            "possiblePositions": [
+                              {
+                                "id": 0,
+                                "parent": 0,
+                                "name": "string"
+                              }
+                            ],
+                            "lastUserSave": {
+                              "snils": "string",
+                              "surname": "string",
+                              "name": "string",
+                              "patronymic": "string",
+                              "organization": {
+                                "id": 0,
+                                "oid": "string",
+                                "nameFull": "string",
+                                "nameShort": "string",
+                                "subject": 0,
+                                "address": "string"
+                              },
+                              "entryDate": "2019-08-24"
+                            }
+                          },
+                          "lastUserSave": {
+                            "snils": "string",
+                            "surname": "string",
+                            "name": "string",
+                            "patronymic": "string",
+                            "organization": {
+                              "id": 0,
+                              "oid": "string",
+                              "nameFull": "string",
+                              "nameShort": "string",
+                              "subject": 0,
+                              "address": "string"
+                            },
+                            "entryDate": "2019-08-24"
+                          }
+                        },
+                        "stage3": {
+                          "id": 0,
+                          "decisDate": "2019-08-24",
+                          "planDateHosp": "2019-08-24",
+                          "dateSendToPat": "2019-08-24",
+                          "dateDocFromSendorg": "2019-08-24",
+                          "dateRegistrationDocs": "2019-08-24",
+                          "upDate": "2019-08-24",
+                          "respFace": {
+                            "id": 0,
+                            "surname": "string",
+                            "name": "string",
+                            "patronymic": "string",
+                            "phone": "string",
+                            "email": "string",
+                            "status": {
+                              "id": 0,
+                              "name": "string"
+                            },
+                            "snils": "string",
+                            "organization": {
+                              "id": 0,
+                              "oid": "string",
+                              "nameFull": "string",
+                              "nameShort": "string",
+                              "subject": 0,
+                              "address": "string"
+                            },
+                            "createdDate": "2019-08-24",
+                            "upDate": "2019-08-24",
+                            "position": {
+                              "id": 0,
+                              "parent": 0,
+                              "name": "string"
+                            },
+                            "possiblePositions": [
+                              {
+                                "id": 0,
+                                "parent": 0,
+                                "name": "string"
+                              }
+                            ],
+                            "lastUserSave": {
+                              "snils": "string",
+                              "surname": "string",
+                              "name": "string",
+                              "patronymic": "string",
+                              "organization": {
+                                "id": 0,
+                                "oid": "string",
+                                "nameFull": "string",
+                                "nameShort": "string",
+                                "subject": 0,
+                                "address": "string"
+                              },
+                              "entryDate": "2019-08-24"
+                            }
+                          },
+                          "typeNotice": {
+                            "id": 0,
+                            "name": "string"
+                          },
+                          "lastUserSave": {
+                            "snils": "string",
+                            "surname": "string",
+                            "name": "string",
+                            "patronymic": "string",
+                            "organization": {
+                              "id": 0,
+                              "oid": "string",
+                              "nameFull": "string",
+                              "nameShort": "string",
+                              "subject": 0,
+                              "address": "string"
+                            },
+                            "entryDate": "2019-08-24"
+                          }
+                        },
+                        "stage4": {
+                          "id": 0,
+                          "decisDate": "2019-08-24",
+                          "needTalonWay": true,
+                          "wayTalonNum": "string",
+                          "needAccomp": true,
+                          "fioAttend": "string",
+                          "dateObrPat": "2019-08-24",
+                          "upDate": "2019-08-24",
+                          "respFace": {
+                            "id": 0,
+                            "surname": "string",
+                            "name": "string",
+                            "patronymic": "string",
+                            "phone": "string",
+                            "email": "string",
+                            "status": {
+                              "id": 0,
+                              "name": "string"
+                            },
+                            "snils": "string",
+                            "organization": {
+                              "id": 0,
+                              "oid": "string",
+                              "nameFull": "string",
+                              "nameShort": "string",
+                              "subject": 0,
+                              "address": "string"
+                            },
+                            "createdDate": "2019-08-24",
+                            "upDate": "2019-08-24",
+                            "position": {
+                              "id": 0,
+                              "parent": 0,
+                              "name": "string"
+                            },
+                            "possiblePositions": [
+                              {
+                                "id": 0,
+                                "parent": 0,
+                                "name": "string"
+                              }
+                            ],
+                            "lastUserSave": {
+                              "snils": "string",
+                              "surname": "string",
+                              "name": "string",
+                              "patronymic": "string",
+                              "organization": {
+                                "id": 0,
+                                "oid": "string",
+                                "nameFull": "string",
+                                "nameShort": "string",
+                                "subject": 0,
+                                "address": "string"
+                              },
+                              "entryDate": "2019-08-24"
+                            }
+                          },
+                          "lastUserSave": {
+                            "snils": "string",
+                            "surname": "string",
+                            "name": "string",
+                            "patronymic": "string",
+                            "organization": {
+                              "id": 0,
+                              "oid": "string",
+                              "nameFull": "string",
+                              "nameShort": "string",
+                              "subject": 0,
+                              "address": "string"
+                            },
+                            "entryDate": "2019-08-24"
+                          },
+                          "dateTalonWay": "2019-08-24"
+                        },
+                        "stage5": {
+                          "id": 0,
+                          "datePatMu": "2019-08-24",
+                          "clinicOtdel": "string",
+                          "upDate": "2019-08-24",
+                          "respFace": {
+                            "id": 0,
+                            "surname": "string",
+                            "name": "string",
+                            "patronymic": "string",
+                            "phone": "string",
+                            "email": "string",
+                            "status": {
+                              "id": 0,
+                              "name": "string"
+                            },
+                            "snils": "string",
+                            "organization": {
+                              "id": 0,
+                              "oid": "string",
+                              "nameFull": "string",
+                              "nameShort": "string",
+                              "subject": 0,
+                              "address": "string"
+                            },
+                            "createdDate": "2019-08-24",
+                            "upDate": "2019-08-24",
+                            "position": {
+                              "id": 0,
+                              "parent": 0,
+                              "name": "string"
+                            },
+                            "possiblePositions": [
+                              {
+                                "id": 0,
+                                "parent": 0,
+                                "name": "string"
+                              }
+                            ],
+                            "lastUserSave": {
+                              "snils": "string",
+                              "surname": "string",
+                              "name": "string",
+                              "patronymic": "string",
+                              "organization": {
+                                "id": 0,
+                                "oid": "string",
+                                "nameFull": "string",
+                                "nameShort": "string",
+                                "subject": 0,
+                                "address": "string"
+                              },
+                              "entryDate": "2019-08-24"
+                            }
+                          },
+                          "lastUserSave": {
+                            "snils": "string",
+                            "surname": "string",
+                            "name": "string",
+                            "patronymic": "string",
+                            "organization": {
+                              "id": 0,
+                              "oid": "string",
+                              "nameFull": "string",
+                              "nameShort": "string",
+                              "subject": 0,
+                              "address": "string"
+                            },
+                            "entryDate": "2019-08-24"
+                          }
+                        },
+                        "stage6": {
+                          "id": 0,
+                          "datePatientOut": "2019-08-24",
+                          "dateOper": "2019-08-24",
+                          "upDate": "2019-08-24",
+                          "mkb10": {
+                            "id": 0,
+                            "code": "string",
+                            "name": "string",
+                            "parent": 0
+                          },
+                          "accompanyingIllness": [
+                            {
+                              "id": 0,
+                              "code": "string",
+                              "name": "string",
+                              "parent": 0
+                            }
+                          ],
+                          "hospitalResult": {
+                            "id": 0,
+                            "name": "string"
+                          },
+                          "recomended": {
+                            "id": 0,
+                            "name": "string"
+                          },
+                          "respFace": {
+                            "id": 0,
+                            "surname": "string",
+                            "name": "string",
+                            "patronymic": "string",
+                            "phone": "string",
+                            "email": "string",
+                            "status": {
+                              "id": 0,
+                              "name": "string"
+                            },
+                            "snils": "string",
+                            "organization": {
+                              "id": 0,
+                              "oid": "string",
+                              "nameFull": "string",
+                              "nameShort": "string",
+                              "subject": 0,
+                              "address": "string"
+                            },
+                            "createdDate": "2019-08-24",
+                            "upDate": "2019-08-24",
+                            "position": {
+                              "id": 0,
+                              "parent": 0,
+                              "name": "string"
+                            },
+                            "possiblePositions": [
+                              {
+                                "id": 0,
+                                "parent": 0,
+                                "name": "string"
+                              }
+                            ],
+                            "lastUserSave": {
+                              "snils": "string",
+                              "surname": "string",
+                              "name": "string",
+                              "patronymic": "string",
+                              "organization": {
+                                "id": 0,
+                                "oid": "string",
+                                "nameFull": "string",
+                                "nameShort": "string",
+                                "subject": 0,
+                                "address": "string"
+                              },
+                              "entryDate": "2019-08-24"
+                            }
+                          },
+                          "lastUserSave": {
+                            "snils": "string",
+                            "surname": "string",
+                            "name": "string",
+                            "patronymic": "string",
+                            "organization": {
+                              "id": 0,
+                              "oid": "string",
+                              "nameFull": "string",
+                              "nameShort": "string",
+                              "subject": 0,
+                              "address": "string"
+                            },
+                            "entryDate": "2019-08-24"
+                          }
+                        },
+                        "stage7": {
+                          "id": 0,
+                          "decisDate": "2019-08-24",
+                          "rehabilitationDone": true,
+                          "patDeath": true,
+                          "upDate": "2019-08-24",
+                          "rehabilitation": {
+                            "id": 0,
+                            "name": "string"
+                          },
+                          "respFace": {
+                            "id": 0,
+                            "surname": "string",
+                            "name": "string",
+                            "patronymic": "string",
+                            "phone": "string",
+                            "email": "string",
+                            "status": {
+                              "id": 0,
+                              "name": "string"
+                            },
+                            "snils": "string",
+                            "organization": {
+                              "id": 0,
+                              "oid": "string",
+                              "nameFull": "string",
+                              "nameShort": "string",
+                              "subject": 0,
+                              "address": "string"
+                            },
+                            "createdDate": "2019-08-24",
+                            "upDate": "2019-08-24",
+                            "position": {
+                              "id": 0,
+                              "parent": 0,
+                              "name": "string"
+                            },
+                            "possiblePositions": [
+                              {
+                                "id": 0,
+                                "parent": 0,
+                                "name": "string"
+                              }
+                            ],
+                            "lastUserSave": {
+                              "snils": "string",
+                              "surname": "string",
+                              "name": "string",
+                              "patronymic": "string",
+                              "organization": {
+                                "id": 0,
+                                "oid": "string",
+                                "nameFull": "string",
+                                "nameShort": "string",
+                                "subject": 0,
+                                "address": "string"
+                              },
+                              "entryDate": "2019-08-24"
+                            }
+                          },
+                          "lastUserSave": {
+                            "snils": "string",
+                            "surname": "string",
+                            "name": "string",
+                            "patronymic": "string",
+                            "organization": {
+                              "id": 0,
+                              "oid": "string",
+                              "nameFull": "string",
+                              "nameShort": "string",
+                              "subject": 0,
+                              "address": "string"
+                            },
+                            "entryDate": "2019-08-24"
+                          }
+                        },
+                        "addressing": "string"
+                      }
+                    ]
+                  }
                 }
               }
-            }
+            },
+            "headers": {}
           }
         },
         "operationId": "get-smpTalons",
@@ -1423,10 +2130,7 @@
             }
           },
           "identityDocuments": {
-            "type": [
-              "string",
-              "array"
-            ],
+            "type": "array",
             "items": {
               "$ref": "#/components/schemas/IdentityDocument"
             }
@@ -2241,7 +2945,7 @@
             "type": "boolean",
             "description": "Признак активности"
           },
-          "type": {
+          "doc_type": {
             "$ref": "#/components/schemas/documentType"
           }
         }
